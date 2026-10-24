@@ -270,3 +270,10 @@ h2 { font-size: clamp(2rem, 4.5vw, 3.4rem); line-height: 1.1; margin-bottom: 56p
   .ai-box { grid-template-columns: 1fr; padding: 40px 24px; }
   .ai-visual { max-width: 320px; margin: 0 auto; width: 100%; }
 }
+
+/* ========== Chi Siamo (segnaposto) ========== */
+.about-placeholder {
+  min-height: 220px; display: grid; place-items: center; text-align: center;
+  border: 1px dashed var(--border); border-radius: var(--radius);
+  background: var(--surface); color: var(--muted);
+}
