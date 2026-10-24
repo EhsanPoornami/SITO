@@ -16,8 +16,11 @@
     <span class="blob b1"></span>
     <span class="blob b2"></span>
     <span class="blob b3"></span>
+    <canvas id="network"></canvas>
     <div class="grid"></div>
   </div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
 
   <!-- Navbar -->
   <header class="nav" id="nav">
@@ -37,11 +40,12 @@
   <main>
     <!-- Hero -->
     <section class="hero container">
-      <div class="badge reveal"><span class="dot"></span> Web · Marketing · Agent AI</div>
+      <div class="badge reveal"><span class="dot"></span> <span class="badge-text">Web · Marketing · Agent AI</span></div>
       <h1 class="reveal">
         Costruiamo il tuo futuro digitale<br />
         con la forza degli <span class="gradient-text">Agent AI</span>.
       </h1>
+      <p class="rotator reveal">Creiamo <span id="typed"></span><span class="caret"></span></p>
       <p class="lead reveal">
         Siti web, app, digital marketing e comunicazione: ogni progetto Ermeia è potenziato
         da agenti di intelligenza artificiale che rendono il lavoro più veloce, preciso e scalabile.
@@ -117,11 +121,22 @@
             <li class="reveal">Integrazione con CRM, gestionali e strumenti che già usi</li>
           </ul>
         </div>
-        <div class="ai-visual reveal" aria-hidden="true">
-          <div class="orb"><span>AI</span></div>
-          <div class="ring r1"></div>
-          <div class="ring r2"></div>
-          <div class="ring r3"></div>
+        <div class="ai-side reveal" aria-hidden="true">
+          <div class="ai-visual">
+            <div class="orb"><span>AI</span></div>
+            <div class="ring r1"></div>
+            <div class="ring r2"></div>
+            <div class="ring r3"></div>
+          </div>
+          <div class="console">
+            <div class="console-head">
+              <span class="lights"><i></i><i></i><i></i></span>
+              <span class="console-title">ermeia-agent · live</span>
+              <span class="status"><span class="dot"></span>online</span>
+            </div>
+            <div class="console-body" id="console"></div>
+            <div class="console-foot"><span>Task completati in questa sessione</span><strong id="tasks">0</strong></div>
+          </div>
         </div>
       </div>
     </section>
