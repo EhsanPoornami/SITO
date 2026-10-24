@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prenota una consulenza — Ermeia Agency</title>
+  <meta name="description" content="Prenota una call gratuita di 30 minuti con Ermeia Agency: siti, app, digital marketing e Agent AI." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Sfondo animato -->
+  <div class="bg" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+    <canvas id="network"></canvas>
+    <div class="grid"></div>
+  </div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">ERMEIA<span>.</span><small>Agency</small></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html#chi-siamo">Chi Siamo</a>
+        <div class="dropdown">
+          <a href="servizi.html">Servizi <span class="caret-down">▾</span></a>
+          <div class="dropdown-menu">
+            <a href="servizi.html#web"><b>01</b> Siti Web & E-commerce</a>
+            <a href="servizi.html#app"><b>02</b> App & Web App</a>
+            <a href="servizi.html#marketing"><b>03</b> Digital Marketing</a>
+            <a href="servizi.html#social"><b>04</b> Social & Comunicazione</a>
+          </div>
+        </div>
+        <a href="ai-per-aziende.html">AI per Aziende</a>
+        <a href="index.html#metodo">Metodo</a>
+        <a href="prenota.html" class="btn btn-small">Prenota una call</a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Apri menu"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero container">
+      <p class="crumbs reveal"><a href="index.html">Home</a> / Prenota una consulenza</p>
+      <div class="book">
+        <div class="book-info">
+          <div class="badge reveal"><span class="dot"></span> <span class="badge-text">Prima call conoscitiva · Gratuita</span></div>
+          <h1 class="reveal">Parliamo del tuo <span class="gradient-text">progetto</span></h1>
+          <p class="lead reveal">30 minuti per conoscerci, capire i tuoi obiettivi e individuare le priorità. Nessun impegno, solo idee concrete.</p>
+          <ol class="next-steps">
+            <li class="reveal"><span>01</span><div><h3>Compili il modulo</h3><p>Ci bastano pochi dati e un'idea di cosa ti serve.</p></div></li>
+            <li class="reveal"><span>02</span><div><h3>Ti rispondiamo</h3><p>Entro un giorno lavorativo fissiamo la call.</p></div></li>
+            <li class="reveal"><span>03</span><div><h3>Call di 30 minuti</h3><p>Parli direttamente con chi seguirà il progetto.</p></div></li>
+            <li class="reveal"><span>04</span><div><h3>Proposta su misura</h3><p>Ricevi un piano d'azione e un preventivo trasparente.</p></div></li>
+          </ol>
+        </div>
+        <form class="book-form reveal" data-book novalidate>
+          <p class="form-label">Su cosa vorresti lavorare?</p>
+          <div class="topics" role="group" aria-label="Argomenti">
+            <button type="button" class="chip" data-topic="Sito web & E-commerce">Sito & E-commerce</button>
+            <button type="button" class="chip" data-topic="App & Web App">App</button>
+            <button type="button" class="chip" data-topic="Digital Marketing">Marketing</button>
+            <button type="button" class="chip" data-topic="Social & Comunicazione">Social</button>
+            <button type="button" class="chip" data-topic="Agent AI & Automazione">Agent AI</button>
+          </div>
+          <div class="field"><input id="f-nome" name="nome" required placeholder=" " autocomplete="name" /><label for="f-nome">Nome e cognome *</label></div>
+          <div class="field"><input id="f-email" name="email" type="email" required placeholder=" " autocomplete="email" /><label for="f-email">Email *</label></div>
+          <div class="field"><input id="f-azienda" name="azienda" placeholder=" " autocomplete="organization" /><label for="f-azienda">Azienda</label></div>
+          <div class="field"><textarea id="f-msg" name="messaggio" rows="4" placeholder=" "></textarea><label for="f-msg">Raccontaci il tuo progetto</label></div>
+          <label class="check"><input type="checkbox" name="privacy" required /> <span>Acconsento al trattamento dei miei dati per essere ricontattato. *</span></label>
+          <button type="submit" class="btn">Richiedi la call gratuita <span class="arrow">→</span></button>
+          <p class="form-error" hidden>Compila i campi obbligatori per continuare.</p>
+          <div class="form-success" hidden>
+            <strong>✓ Richiesta pronta!</strong>
+            <p>Si è aperto il tuo programma di posta: invia l'email e ti ricontattiamo entro un giorno lavorativo.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section container">
+      <p class="eyebrow reveal">Prima di scriverci</p>
+      <h2 class="reveal">Domande <span class="gradient-text">frequenti</span></h2>
+      <div class="faq">
+        <details class="reveal"><summary>La prima call è davvero gratuita?</summary><p>Sì. Serve a capire se e come possiamo aiutarti. Nessun costo e nessun impegno.</p></details>
+        <details class="reveal"><summary>Cosa devo preparare per la call?</summary><p>Niente di particolare: un'idea dei tuoi obiettivi e, se li hai, il sito o i profili social attuali.</p></details>
+        <details class="reveal"><summary>Lavorate anche con piccole attività?</summary><p>Assolutamente sì. Lavoriamo con professionisti, PMI e aziende strutturate, adattando ogni soluzione al budget.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">ERMEIA<span>.</span><small>Agency</small></a>
+        <p>Siti, app, digital marketing e comunicazione, potenziati da Agent AI.</p>
+        <a href="mailto:info@ermeia.agency" class="btn btn-small">Scrivici <span class="arrow">→</span></a>
+      </div>
+      <div>
+        <h4>Naviga</h4>
+        <a href="index.html#chi-siamo">Chi Siamo</a>
+        <a href="servizi.html">Servizi</a>
+        <a href="ai-per-aziende.html">AI per Aziende</a>
+        <a href="index.html#metodo">Metodo</a>
+        <a href="prenota.html">Contatti</a>
+      </div>
+      <div>
+        <h4>Servizi</h4>
+        <a href="servizi.html#web">Siti Web & E-commerce</a>
+        <a href="servizi.html#app">App & Web App</a>
+        <a href="servizi.html#marketing">Digital Marketing</a>
+        <a href="servizi.html#social">Social & Comunicazione</a>
+      </div>
+      <div>
+        <h4>Contatti</h4>
+        <a href="mailto:info@ermeia.agency">info@ermeia.agency</a>
+        <a href="prenota.html">Prenota una consulenza</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="year"></span> Ermeia Agency. Tutti i diritti riservati.</p>
+      <a href="#" class="to-top">Torna su ↑</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

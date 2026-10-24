@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servizi — Ermeia Agency</title>
+  <meta name="description" content="Siti web, e-commerce, app, digital marketing, social e comunicazione: i servizi di Ermeia Agency, potenziati da Agent AI." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Sfondo animato -->
+  <div class="bg" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+    <canvas id="network"></canvas>
+    <div class="grid"></div>
+  </div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">ERMEIA<span>.</span><small>Agency</small></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html#chi-siamo">Chi Siamo</a>
+        <div class="dropdown">
+          <a href="servizi.html" class="active">Servizi <span class="caret-down">▾</span></a>
+          <div class="dropdown-menu">
+            <a href="servizi.html#web"><b>01</b> Siti Web & E-commerce</a>
+            <a href="servizi.html#app"><b>02</b> App & Web App</a>
+            <a href="servizi.html#marketing"><b>03</b> Digital Marketing</a>
+            <a href="servizi.html#social"><b>04</b> Social & Comunicazione</a>
+          </div>
+        </div>
+        <a href="ai-per-aziende.html">AI per Aziende</a>
+        <a href="index.html#metodo">Metodo</a>
+        <a href="prenota.html" class="btn btn-small">Prenota una call</a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Apri menu"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero container">
+      <p class="crumbs reveal"><a href="index.html">Home</a> / Servizi</p>
+      <h1 class="reveal">Cosa <span class="gradient-text">facciamo</span></h1>
+      <p class="lead reveal">Quattro aree, un unico partner. Uniamo design, tecnologia e strategia, e potenziamo ogni progetto con i nostri Agent AI.</p>
+      <div class="jump reveal">
+        <a href="#web"><b>01</b> Siti Web & E-commerce</a>
+        <a href="#app"><b>02</b> App & Web App</a>
+        <a href="#marketing"><b>03</b> Digital Marketing</a>
+        <a href="#social"><b>04</b> Social & Comunicazione</a>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="svc" id="web">
+        <div class="svc-text">
+          <p class="eyebrow reveal">01 · Siti Web & E-commerce</p>
+          <h2 class="reveal">Siti che <span class="gradient-text">lavorano</span> per te</h2>
+          <p class="reveal">Un sito non è una brochure: è il tuo miglior venditore. Progettiamo siti vetrina, landing page ed e-commerce veloci, curati nel minimo dettaglio e costruiti per trasformare le visite in clienti.</p>
+          <ul class="ticks two reveal">
+            <li>Design UI/UX su misura</li><li>Landing page ad alta conversione</li>
+            <li>E-commerce e pagamenti online</li><li>SEO tecnico e performance</li>
+            <li>Testi e contenuti con supporto AI</li><li>Hosting, sicurezza e manutenzione</li>
+          </ul>
+          <a href="prenota.html?obiettivo=sito" class="btn reveal">Voglio un nuovo sito <span class="arrow">→</span></a>
+        </div>
+        <div class="svc-visual reveal" aria-hidden="true">
+          <span class="big-num">01</span>
+          <div class="mock">
+            <div class="mock-bar"><i></i><i></i><i></i><span>ermeia.agency</span></div>
+            <div class="mock-body"><b></b><b class="s"></b><b class="xs"></b><div class="mock-row"><em></em><em></em><em></em></div></div>
+          </div>
+          <span class="float-tag t1">⚡ Caricamento rapido</span>
+          <span class="float-tag t2">↗ Più contatti</span>
+          <span class="float-tag t3">✦ Mobile first</span>
+        </div>
+      </section>
+
+      <section class="svc" id="app">
+        <div class="svc-text">
+          <p class="eyebrow reveal">02 · App & Web App</p>
+          <h2 class="reveal">Dall'idea <span class="gradient-text">allo store</span></h2>
+          <p class="reveal">Progettiamo e sviluppiamo app mobile, web app e gestionali su misura. Partiamo dai processi reali della tua azienda per creare strumenti semplici da usare e pronti a crescere con te.</p>
+          <ul class="ticks two reveal">
+            <li>App iOS e Android</li><li>Web app e aree riservate</li>
+            <li>Gestionali su misura</li><li>Integrazioni con CRM ed ERP</li>
+            <li>Funzioni AI integrate</li><li>Pubblicazione e manutenzione</li>
+          </ul>
+          <a href="prenota.html?obiettivo=app" class="btn reveal">Parliamo della tua app <span class="arrow">→</span></a>
+        </div>
+        <div class="svc-visual reveal" aria-hidden="true">
+          <span class="big-num">02</span>
+          <div class="phone"><div class="phone-notch"></div><b></b><b class="s"></b><div class="phone-grid"><em></em><em></em><em></em><em></em></div></div>
+          <span class="float-tag t1">▣ iOS & Android</span>
+          <span class="float-tag t2">⟳ Sincronizzazione</span>
+          <span class="float-tag t3">✦ AI integrata</span>
+        </div>
+      </section>
+
+      <section class="svc" id="marketing">
+        <div class="svc-text">
+          <p class="eyebrow reveal">03 · Digital Marketing</p>
+          <h2 class="reveal">Campagne che <span class="gradient-text">performano</span></h2>
+          <p class="reveal">Portiamo le persone giuste sul tuo sito e le accompagniamo fino all'acquisto. Ogni euro investito è tracciato, analizzato e ottimizzato, anche grazie ai nostri agenti di analisi.</p>
+          <ul class="ticks two reveal">
+            <li>Google Ads e Meta Ads</li><li>SEO e content marketing</li>
+            <li>Email e marketing automation</li><li>Funnel e lead generation</li>
+            <li>Analisi dati con AI</li><li>Report chiari ogni mese</li>
+          </ul>
+          <a href="prenota.html?obiettivo=clienti" class="btn reveal">Trova nuovi clienti <span class="arrow">→</span></a>
+        </div>
+        <div class="svc-visual reveal" aria-hidden="true">
+          <span class="big-num">03</span>
+          <div class="chart"><i style="--h:30%"></i><i style="--h:45%"></i><i style="--h:38%"></i><i style="--h:60%"></i><i style="--h:72%"></i><i style="--h:88%"></i></div>
+          <span class="float-tag t1">◎ Target preciso</span>
+          <span class="float-tag t2">↗ ROI misurabile</span>
+          <span class="float-tag t3">✦ Ottimizzazione AI</span>
+        </div>
+      </section>
+
+      <section class="svc" id="social">
+        <div class="svc-text">
+          <p class="eyebrow reveal">04 · Social & Comunicazione</p>
+          <h2 class="reveal">Un brand che <span class="gradient-text">si fa ricordare</span></h2>
+          <p class="reveal">Diamo al tuo brand una voce riconoscibile. Curiamo identità visiva, piano editoriale e contenuti foto e video, per costruire una community che ti sceglie.</p>
+          <ul class="ticks two reveal">
+            <li>Brand identity e logo</li><li>Piano editoriale</li>
+            <li>Contenuti foto e video</li><li>Gestione profili social</li>
+            <li>Community management</li><li>Tono di voce e copywriting</li>
+          </ul>
+          <a href="prenota.html?obiettivo=social" class="btn reveal">Fai crescere il tuo brand <span class="arrow">→</span></a>
+        </div>
+        <div class="svc-visual reveal" aria-hidden="true">
+          <span class="big-num">04</span>
+          <div class="posts"><em></em><em></em><em></em><em></em><em></em><em></em></div>
+          <span class="float-tag t1">♥ Engagement</span>
+          <span class="float-tag t2">✦ Contenuti unici</span>
+          <span class="float-tag t3">◎ Community</span>
+        </div>
+      </section>
+    </div>
+
+    <!-- FAQ -->
+    <section class="section container">
+      <p class="eyebrow reveal">Domande frequenti</p>
+      <h2 class="reveal">Hai qualche <span class="gradient-text">dubbio</span>?</h2>
+      <div class="faq">
+        <details class="reveal"><summary>Quanto costa un progetto?</summary><p>Ogni progetto è su misura, quindi il prezzo dipende da obiettivi e funzionalità. Dopo la prima call gratuita ricevi un preventivo chiaro e dettagliato, senza costi nascosti.</p></details>
+        <details class="reveal"><summary>Quanto tempo serve per realizzare un sito?</summary><p>Dipende dalla complessità: una landing page richiede pochi giorni, un sito completo o un e-commerce qualche settimana. Ti diamo una tabella di marcia precisa prima di iniziare.</p></details>
+        <details class="reveal"><summary>Come usate gli Agent AI nei progetti?</summary><p>Gli agenti ci aiutano in analisi, contenuti, test e ottimizzazione: il lavoro è più veloce e preciso. Ogni risultato è sempre controllato e rifinito dal nostro team.</p></details>
+        <details class="reveal"><summary>Posso affidarvi solo una parte del lavoro?</summary><p>Certo. Puoi scegliere un singolo servizio o affidarci tutto il digitale: in entrambi i casi avrai un unico referente.</p></details>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="cta reveal">
+        <h2>Non sai quale servizio <span class="gradient-text">fa per te</span>?</h2>
+        <p>Raccontaci il tuo obiettivo: ti consigliamo la strada migliore, gratis.</p>
+        <a href="prenota.html" class="btn">Prenota una call gratuita <span class="arrow">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">ERMEIA<span>.</span><small>Agency</small></a>
+        <p>Siti, app, digital marketing e comunicazione, potenziati da Agent AI.</p>
+        <a href="prenota.html" class="btn btn-small">Prenota una call <span class="arrow">→</span></a>
+      </div>
+      <div>
+        <h4>Naviga</h4>
+        <a href="index.html#chi-siamo">Chi Siamo</a>
+        <a href="servizi.html">Servizi</a>
+        <a href="ai-per-aziende.html">AI per Aziende</a>
+        <a href="index.html#metodo">Metodo</a>
+        <a href="prenota.html">Contatti</a>
+      </div>
+      <div>
+        <h4>Servizi</h4>
+        <a href="servizi.html#web">Siti Web & E-commerce</a>
+        <a href="servizi.html#app">App & Web App</a>
+        <a href="servizi.html#marketing">Digital Marketing</a>
+        <a href="servizi.html#social">Social & Comunicazione</a>
+      </div>
+      <div>
+        <h4>Contatti</h4>
+        <a href="mailto:info@ermeia.agency">info@ermeia.agency</a>
+        <a href="prenota.html">Prenota una consulenza</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="year"></span> Ermeia Agency. Tutti i diritti riservati.</p>
+      <a href="#" class="to-top">Torna su ↑</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

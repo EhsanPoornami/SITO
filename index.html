@@ -25,13 +25,21 @@
   <!-- Navbar -->
   <header class="nav" id="nav">
     <div class="container nav-inner">
-      <a href="#" class="logo">ERMEIA<span>.</span><small>Agency</small></a>
+      <a href="index.html" class="logo">ERMEIA<span>.</span><small>Agency</small></a>
       <nav class="nav-links" id="navLinks">
-        <a href="#chi-siamo">Chi Siamo</a>
-        <a href="#servizi">Servizi</a>
-        <a href="#ai">Agent AI</a>
-        <a href="#metodo">Metodo</a>
-        <a href="#contatti" class="btn btn-small">Parliamone</a>
+        <a href="index.html#chi-siamo">Chi Siamo</a>
+        <div class="dropdown">
+          <a href="servizi.html">Servizi <span class="caret-down">▾</span></a>
+          <div class="dropdown-menu">
+            <a href="servizi.html#web"><b>01</b> Siti Web & E-commerce</a>
+            <a href="servizi.html#app"><b>02</b> App & Web App</a>
+            <a href="servizi.html#marketing"><b>03</b> Digital Marketing</a>
+            <a href="servizi.html#social"><b>04</b> Social & Comunicazione</a>
+          </div>
+        </div>
+        <a href="ai-per-aziende.html">AI per Aziende</a>
+        <a href="index.html#metodo">Metodo</a>
+        <a href="prenota.html" class="btn btn-small">Prenota una call</a>
       </nav>
       <button class="burger" id="burger" aria-label="Apri menu"><span></span><span></span></button>
     </div>
@@ -51,8 +59,19 @@
         da agenti di intelligenza artificiale che rendono il lavoro più veloce, preciso e scalabile.
       </p>
       <div class="hero-cta reveal">
-        <a href="#contatti" class="btn">Prenota una call gratuita <span class="arrow">→</span></a>
-        <a href="#servizi" class="btn btn-ghost">Scopri i servizi</a>
+        <a href="prenota.html" class="btn">Prenota 30 minuti con noi <span class="arrow">→</span></a>
+        <a href="#obiettivi" class="btn btn-ghost">Qual è il tuo obiettivo?</a>
+      </div>
+      <p class="trust reveal">✦ Rispondiamo entro un giorno lavorativo · Parli direttamente con chi segue il progetto</p>
+    </section>
+
+    <!-- Numeri chiave -->
+    <section class="container">
+      <div class="stats reveal">
+        <div class="stat"><strong data-count="24" data-suffix="/7">0</strong><span>Agent AI sempre attivi</span></div>
+        <div class="stat"><strong data-count="360" data-suffix="°">0</strong><span>Web, marketing e comunicazione</span></div>
+        <div class="stat"><strong data-count="4">0</strong><span>Aree di servizio integrate</span></div>
+        <div class="stat"><strong data-count="1">0</strong><span>Unico referente per tutto</span></div>
       </div>
     </section>
 
@@ -65,6 +84,83 @@
         <span>Social Media</span><span>✦</span><span>SEO & ADV</span><span>✦</span><span>Agent AI</span><span>✦</span>
       </div>
     </div>
+
+    <!-- Obiettivi -->
+    <section class="section" id="obiettivi">
+      <div class="container head-row">
+        <div>
+          <p class="eyebrow reveal">Cosa puoi chiederci</p>
+          <h2 class="reveal">Qual è il tuo <span class="gradient-text">obiettivo</span> principale?</h2>
+        </div>
+        <div class="car-nav reveal">
+          <button class="car-btn" data-dir="-1" aria-label="Obiettivo precedente">←</button>
+          <button class="car-btn" data-dir="1" aria-label="Obiettivo successivo">→</button>
+        </div>
+      </div>
+      <div class="carousel" id="goals">
+        <a class="card goal reveal" href="prenota.html?obiettivo=sito">
+          <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div>
+          <h3>Avere un sito che porta clienti</h3>
+          <p>Non una vetrina ferma: un sito veloce che trasforma le visite in contatti.</p>
+          <span class="goal-cta">Parliamone <span class="arrow">→</span></span>
+        </a>
+        <a class="card goal reveal" href="prenota.html?obiettivo=ecommerce">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></div>
+          <h3>Lanciare o far crescere un e-commerce</h3>
+          <p>Negozio online, pagamenti, logistica e campagne per vendere di più.</p>
+          <span class="goal-cta">Parliamone <span class="arrow">→</span></span>
+        </a>
+        <a class="card goal reveal" href="prenota.html?obiettivo=app">
+          <div class="icon"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+          <h3>Creare un'app per il mio business</h3>
+          <p>App mobile o gestionale su misura, dall'idea alla pubblicazione sugli store.</p>
+          <span class="goal-cta">Parliamone <span class="arrow">→</span></span>
+        </a>
+        <a class="card goal reveal" href="prenota.html?obiettivo=clienti">
+          <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div>
+          <h3>Trovare nuovi clienti online</h3>
+          <p>SEO, Google Ads e Meta Ads mirati, con budget sotto controllo.</p>
+          <span class="goal-cta">Parliamone <span class="arrow">→</span></span>
+        </a>
+        <a class="card goal reveal" href="prenota.html?obiettivo=social">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5z"/></svg></div>
+          <h3>Crescere sui social</h3>
+          <p>Piano editoriale, contenuti foto e video e una community che ti segue.</p>
+          <span class="goal-cta">Parliamone <span class="arrow">→</span></span>
+        </a>
+        <a class="card goal reveal" href="prenota.html?obiettivo=brand">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3l2.8 5.8 6.2.9-4.5 4.3 1 6.2L12 17.3l-5.5 2.9 1-6.2L3 9.7l6.2-.9z"/></svg></div>
+          <h3>Rinnovare il mio brand</h3>
+          <p>Logo, identità visiva e tono di voce coerenti su ogni canale.</p>
+          <span class="goal-cta">Parliamone <span class="arrow">→</span></span>
+        </a>
+        <a class="card goal reveal" href="prenota.html?obiettivo=automazione">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3L20 9M20 4v5h-5"/><path d="M20 12a8 8 0 0 1-14 5.3L4 15M4 20v-5h5"/></svg></div>
+          <h3>Automatizzare i processi con l'AI</h3>
+          <p>Agenti che svolgono le attività ripetitive al posto del tuo team.</p>
+          <span class="goal-cta">Parliamone <span class="arrow">→</span></span>
+        </a>
+        <a class="card goal reveal" href="prenota.html?obiettivo=assistente">
+          <div class="icon"><svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01M9.5 16.5h5"/></svg></div>
+          <h3>Un assistente AI per i miei clienti</h3>
+          <p>Risponde su sito, WhatsApp e social, 24 ore su 24, con il tuo tono.</p>
+          <span class="goal-cta">Parliamone <span class="arrow">→</span></span>
+        </a>
+        <a class="card goal reveal" href="prenota.html?obiettivo=tempo">
+          <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <h3>Risparmiare tempo su email e preventivi</h3>
+          <p>Bozze, documenti e preventivi pronti in pochi secondi.</p>
+          <span class="goal-cta">Parliamone <span class="arrow">→</span></span>
+        </a>
+        <a class="card goal reveal" href="prenota.html?obiettivo=iniziare">
+          <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></div>
+          <h3>Non so da dove iniziare</h3>
+          <p>Nessun problema: analizziamo insieme la situazione e le priorità.</p>
+          <span class="goal-cta">Parliamone <span class="arrow">→</span></span>
+        </a>
+      </div>
+      <div class="container"><div class="car-progress"><span id="goalsBar"></span></div></div>
+    </section>
 
     <!-- Chi Siamo -->
     <section class="section container" id="chi-siamo">
@@ -79,26 +175,38 @@
     <section class="section container" id="servizi">
       <p class="eyebrow reveal">Cosa facciamo</p>
       <h2 class="reveal">Tutto il digitale, <span class="gradient-text">in un unico partner</span></h2>
-      <div class="cards">
-        <article class="card reveal">
+      <div class="cards services">
+        <article class="card svc-card reveal">
+          <span class="svc-num">01</span>
           <div class="icon">◈</div>
           <h3>Siti Web & E-commerce</h3>
           <p>Siti vetrina, landing page e negozi online veloci, curati nel design e ottimizzati per convertire.</p>
+          <ul class="ticks"><li>Design UI/UX su misura</li><li>Landing page ad alta conversione</li><li>E-commerce e pagamenti</li><li>SEO tecnico e performance</li></ul>
+          <a href="servizi.html#web" class="more">Scopri di più <span class="arrow">→</span></a>
         </article>
-        <article class="card reveal">
+        <article class="card svc-card reveal">
+          <span class="svc-num">02</span>
           <div class="icon">▣</div>
           <h3>App & Web App</h3>
           <p>Applicazioni mobile e gestionali su misura, dall'idea al lancio sugli store.</p>
+          <ul class="ticks"><li>App iOS e Android</li><li>Gestionali e aree riservate</li><li>Integrazioni con i tuoi sistemi</li><li>Manutenzione ed evoluzione</li></ul>
+          <a href="servizi.html#app" class="more">Scopri di più <span class="arrow">→</span></a>
         </article>
-        <article class="card reveal">
+        <article class="card svc-card reveal">
+          <span class="svc-num">03</span>
           <div class="icon">◎</div>
           <h3>Digital Marketing</h3>
           <p>SEO, campagne Google e Meta Ads, email marketing e funnel orientati ai risultati.</p>
+          <ul class="ticks"><li>Google Ads e Meta Ads</li><li>SEO e contenuti</li><li>Email e marketing automation</li><li>Report chiari e misurabili</li></ul>
+          <a href="servizi.html#marketing" class="more">Scopri di più <span class="arrow">→</span></a>
         </article>
-        <article class="card reveal">
+        <article class="card svc-card reveal">
+          <span class="svc-num">04</span>
           <div class="icon">✦</div>
           <h3>Social & Comunicazione</h3>
           <p>Gestione social, piano editoriale, contenuti foto e video, branding e tono di voce.</p>
+          <ul class="ticks"><li>Piano editoriale</li><li>Contenuti foto e video</li><li>Brand identity</li><li>Community management</li></ul>
+          <a href="servizi.html#social" class="more">Scopri di più <span class="arrow">→</span></a>
         </article>
       </div>
     </section>
@@ -120,6 +228,7 @@
             <li class="reveal">Gestione automatica di preventivi, email e documenti</li>
             <li class="reveal">Integrazione con CRM, gestionali e strumenti che già usi</li>
           </ul>
+          <a href="ai-per-aziende.html" class="btn btn-ghost reveal ai-more">Scopri l'AI per aziende <span class="arrow">→</span></a>
         </div>
         <div class="ai-side reveal" aria-hidden="true">
           <div class="ai-visual">
@@ -145,7 +254,7 @@
     <section class="section container" id="metodo">
       <p class="eyebrow reveal">Come lavoriamo</p>
       <h2 class="reveal">Semplice, veloce, <span class="gradient-text">misurabile</span></h2>
-      <div class="steps">
+      <div class="steps timeline">
         <div class="step reveal"><span class="num">01</span><h3>Analisi</h3><p>Studiamo il tuo business, i tuoi obiettivi e i processi da migliorare.</p></div>
         <div class="step reveal"><span class="num">02</span><h3>Strategia</h3><p>Definiamo un piano su misura che unisce creatività, tecnologia e AI.</p></div>
         <div class="step reveal"><span class="num">03</span><h3>Sviluppo</h3><p>Realizziamo siti, app, campagne e automazioni con i nostri Agent AI.</p></div>
@@ -153,28 +262,90 @@
       </div>
     </section>
 
-    <!-- Punti di forza -->
+    <!-- Perché Ermeia -->
     <section class="section container">
-      <div class="stats reveal">
-        <div class="stat"><strong>24/7</strong><span>Agent AI sempre attivi</span></div>
-        <div class="stat"><strong>360°</strong><span>Web, marketing e comunicazione</span></div>
-        <div class="stat"><strong>1</strong><span>Unico referente per tutto</span></div>
+      <p class="eyebrow reveal">Perché Ermeia</p>
+      <h2 class="reveal">Promesse chiare. <span class="gradient-text">Risultati concreti.</span></h2>
+      <div class="metrics">
+        <div class="metric reveal"><strong data-count="24" data-suffix="/7">0</strong><h3>Sempre operativi</h3><p>I nostri Agent AI lavorano anche quando l'ufficio è chiuso.</p></div>
+        <div class="metric reveal"><strong data-count="1" data-suffix=" giorno">0</strong><h3>Per una risposta</h3><p>Ogni richiesta riceve risposta entro un giorno lavorativo.</p></div>
+        <div class="metric reveal"><strong data-count="100" data-suffix="%">0</strong><h3>Su misura</h3><p>Niente template copiati: ogni progetto nasce dal tuo business.</p></div>
+        <div class="metric reveal"><strong data-count="360" data-suffix="°">0</strong><h3>Visione completa</h3><p>Sito, marketing, social e AI parlano la stessa lingua.</p></div>
+        <div class="metric reveal"><strong data-count="1">0</strong><h3>Unico referente</h3><p>Una persona dedicata che conosce il tuo progetto dall'inizio.</p></div>
+        <div class="metric reveal"><strong data-count="0" data-suffix=" sorprese">0</strong><h3>Preventivi trasparenti</h3><p>Sai sempre cosa paghi e perché, prima di iniziare.</p></div>
       </div>
     </section>
 
-    <!-- CTA -->
+    <!-- Prenota -->
     <section class="section container" id="contatti">
-      <div class="cta reveal">
-        <h2>Pronto a portare il tuo business<br />nel <span class="gradient-text">futuro</span>?</h2>
-        <p>Raccontaci il tuo progetto: la prima consulenza è gratuita.</p>
-        <a href="mailto:info@ermeia.agency" class="btn">Contattaci ora <span class="arrow">→</span></a>
+      <div class="book">
+        <div class="book-info">
+          <p class="eyebrow reveal">Prenota una consulenza</p>
+          <h2 class="reveal">Pronto a portare il tuo business nel <span class="gradient-text">futuro</span>?</h2>
+          <p class="reveal">Una prima call conoscitiva serve a chiarire obiettivi, priorità e i punti su cui intervenire. È gratuita e senza impegno.</p>
+          <ul class="book-points reveal">
+            <li><span>30'</span>Call conoscitiva con chi seguirà il progetto</li>
+            <li><span>24h</span>Risposta entro un giorno lavorativo</li>
+            <li><span>€0</span>Prima consulenza gratuita</li>
+          </ul>
+        </div>
+        <form class="book-form reveal" data-book novalidate>
+          <p class="form-label">Su cosa vorresti lavorare?</p>
+          <div class="topics" role="group" aria-label="Argomenti">
+            <button type="button" class="chip" data-topic="Sito web & E-commerce">Sito & E-commerce</button>
+            <button type="button" class="chip" data-topic="App & Web App">App</button>
+            <button type="button" class="chip" data-topic="Digital Marketing">Marketing</button>
+            <button type="button" class="chip" data-topic="Social & Comunicazione">Social</button>
+            <button type="button" class="chip" data-topic="Agent AI & Automazione">Agent AI</button>
+          </div>
+          <div class="field"><input id="f-nome" name="nome" required placeholder=" " autocomplete="name" /><label for="f-nome">Nome e cognome *</label></div>
+          <div class="field"><input id="f-email" name="email" type="email" required placeholder=" " autocomplete="email" /><label for="f-email">Email *</label></div>
+          <div class="field"><input id="f-azienda" name="azienda" placeholder=" " autocomplete="organization" /><label for="f-azienda">Azienda</label></div>
+          <div class="field"><textarea id="f-msg" name="messaggio" rows="3" placeholder=" "></textarea><label for="f-msg">Raccontaci il tuo progetto</label></div>
+          <label class="check"><input type="checkbox" name="privacy" required /> <span>Acconsento al trattamento dei miei dati per essere ricontattato. *</span></label>
+          <button type="submit" class="btn">Richiedi la call gratuita <span class="arrow">→</span></button>
+          <p class="form-error" hidden>Compila i campi obbligatori per continuare.</p>
+          <div class="form-success" hidden>
+            <strong>✓ Richiesta pronta!</strong>
+            <p>Si è aperto il tuo programma di posta: invia l'email e ti ricontattiamo entro un giorno lavorativo.</p>
+          </div>
+        </form>
       </div>
     </section>
   </main>
 
-  <footer class="footer container">
-    <a href="#" class="logo">ERMEIA<span>.</span><small>Agency</small></a>
-    <p>© <span id="year"></span> Ermeia Agency — Siti, App, Digital Marketing & Agent AI. Tutti i diritti riservati.</p>
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">ERMEIA<span>.</span><small>Agency</small></a>
+        <p>Siti, app, digital marketing e comunicazione, potenziati da Agent AI.</p>
+        <a href="prenota.html" class="btn btn-small">Prenota una call <span class="arrow">→</span></a>
+      </div>
+      <div>
+        <h4>Naviga</h4>
+        <a href="index.html#chi-siamo">Chi Siamo</a>
+        <a href="servizi.html">Servizi</a>
+        <a href="ai-per-aziende.html">AI per Aziende</a>
+        <a href="index.html#metodo">Metodo</a>
+        <a href="prenota.html">Contatti</a>
+      </div>
+      <div>
+        <h4>Servizi</h4>
+        <a href="servizi.html#web">Siti Web & E-commerce</a>
+        <a href="servizi.html#app">App & Web App</a>
+        <a href="servizi.html#marketing">Digital Marketing</a>
+        <a href="servizi.html#social">Social & Comunicazione</a>
+      </div>
+      <div>
+        <h4>Contatti</h4>
+        <a href="mailto:info@ermeia.agency">info@ermeia.agency</a>
+        <a href="prenota.html">Prenota una consulenza</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="year"></span> Ermeia Agency. Tutti i diritti riservati.</p>
+      <a href="#" class="to-top">Torna su ↑</a>
+    </div>
   </footer>
 
   <script src="script.js"></script>

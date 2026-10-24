@@ -134,7 +134,9 @@ document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 // Parole che si scrivono da sole nell'hero
 const typed = document.getElementById("typed");
 const words = ["siti web che convertono", "app su misura", "campagne che performano", "contenuti che lasciano il segno", "processi che vanno da soli"];
-if (reduceMotion) {
+if (!typed) {
+  // pagina senza hero animato
+} else if (reduceMotion) {
   typed.textContent = words[0];
 } else {
   let w = 0, c = 0, deleting = false;
@@ -211,9 +213,151 @@ async function runAgent() {
     await wait(600);
   }
 }
-new IntersectionObserver((entries, obs) => {
-  if (entries[0].isIntersecting) { runAgent(); obs.disconnect(); }
-}, { threshold: 0.3 }).observe(consoleBody);
+if (consoleBody) {
+  new IntersectionObserver((entries, obs) => {
+    if (entries[0].isIntersecting) { runAgent(); obs.disconnect(); }
+  }, { threshold: 0.3 }).observe(consoleBody);
+}
+
+// Contatori animati
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const target = +el.dataset.count, suffix = el.dataset.suffix || "";
+    const start = performance.now(), duration = reduceMotion ? 0 : 1600;
+    (function tick(now) {
+      const t = duration ? Math.min((now - start) / duration, 1) : 1;
+      el.textContent = Math.round(target * (1 - Math.pow(1 - t, 3))) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+    })(start);
+    counterObserver.unobserve(el);
+  });
+}, { threshold: 0.6 });
+document.querySelectorAll("[data-count]").forEach((el) => counterObserver.observe(el));
+
+// Carosello obiettivi: frecce, trascinamento e barra di avanzamento
+const carousel = document.getElementById("goals");
+if (carousel) {
+  const bar = document.getElementById("goalsBar");
+  const step = () => carousel.querySelector(".goal").offsetWidth + 20;
+  document.querySelectorAll(".car-btn").forEach((btn) =>
+    btn.addEventListener("click", () => carousel.scrollBy({ left: step() * +btn.dataset.dir, behavior: "smooth" }))
+  );
+  const updateBar = () => {
+    const max = carousel.scrollWidth - carousel.clientWidth;
+    const visible = carousel.clientWidth / carousel.scrollWidth;
+    bar.style.width = `${visible * 100}%`;
+    bar.style.transform = `translateX(${max > 0 ? (carousel.scrollLeft / max) * (1 / visible - 1) * 100 : 0}%)`;
+  };
+  carousel.addEventListener("scroll", updateBar, { passive: true });
+  window.addEventListener("resize", updateBar);
+  updateBar();
+
+  let dragging = false, moved = false, startX = 0, startScroll = 0;
+  carousel.addEventListener("pointerdown", (e) => {
+    if (e.pointerType !== "mouse") return;
+    dragging = true; moved = false; startX = e.clientX; startScroll = carousel.scrollLeft;
+  });
+  window.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 5) { moved = true; carousel.classList.add("dragging"); }
+    carousel.scrollLeft = startScroll - dx;
+  });
+  window.addEventListener("pointerup", () => { dragging = false; carousel.classList.remove("dragging"); });
+  carousel.addEventListener("click", (e) => { if (moved) { e.preventDefault(); moved = false; } }, true);
+  carousel.addEventListener("dragstart", (e) => e.preventDefault());
+}
+
+// Tab dei casi d'uso AI
+document.querySelectorAll(".tab").forEach((tab) =>
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("active", t === tab));
+    document.querySelectorAll(".tab-panel").forEach((p) => p.classList.toggle("active", p.dataset.panel === tab.dataset.tab));
+  })
+);
+
+// Calcolatore del tempo risparmiato
+const rPeople = document.getElementById("r-people");
+if (rPeople) {
+  const rHours = document.getElementById("r-hours"), rCost = document.getElementById("r-cost");
+  const fmt = (n) => Math.round(n).toLocaleString("it-IT");
+  const calc = () => {
+    document.getElementById("o-people").textContent = rPeople.value;
+    document.getElementById("o-hours").textContent = rHours.value;
+    document.getElementById("o-cost").textContent = `${rCost.value} €`;
+    const hours = rPeople.value * rHours.value * 0.6 * 46;
+    document.getElementById("calcHours").textContent = fmt(hours);
+    document.getElementById("calcEuro").textContent = `${fmt(hours * rCost.value)} €`;
+    [rPeople, rHours, rCost].forEach((r) => r.style.setProperty("--p", `${((r.value - r.min) / (r.max - r.min)) * 100}%`));
+  };
+  [rPeople, rHours, rCost].forEach((r) => r.addEventListener("input", calc));
+  calc();
+}
+
+// Form di prenotazione: argomenti, precompilazione da obiettivo, invio via email
+const goals = {
+  sito: ["Sito web & E-commerce", "Vorrei un sito che mi porti nuovi clienti."],
+  ecommerce: ["Sito web & E-commerce", "Vorrei lanciare o far crescere un e-commerce."],
+  app: ["App & Web App", "Vorrei creare un'app per il mio business."],
+  clienti: ["Digital Marketing", "Vorrei trovare nuovi clienti online."],
+  social: ["Social & Comunicazione", "Vorrei crescere sui social."],
+  brand: ["Social & Comunicazione", "Vorrei rinnovare il mio brand."],
+  automazione: ["Agent AI & Automazione", "Vorrei automatizzare alcuni processi con l'AI."],
+  assistente: ["Agent AI & Automazione", "Vorrei un assistente AI per i miei clienti."],
+  tempo: ["Agent AI & Automazione", "Vorrei risparmiare tempo su email e preventivi."],
+  iniziare: [null, "Non so da dove iniziare: vorrei un consiglio su come crescere online."],
+};
+document.querySelectorAll("[data-book]").forEach((form) => {
+  const chips = form.querySelectorAll(".chip");
+  chips.forEach((chip) => chip.addEventListener("click", () => chip.classList.toggle("active")));
+
+  const goal = goals[new URLSearchParams(location.search).get("obiettivo")];
+  if (goal) {
+    chips.forEach((chip) => chip.classList.toggle("active", chip.dataset.topic === goal[0]));
+    form.messaggio.value = goal[1];
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const error = form.querySelector(".form-error");
+    if (!form.checkValidity()) {
+      error.hidden = false;
+      form.querySelector(":invalid").focus();
+      return;
+    }
+    error.hidden = true;
+    const topics = [...chips].filter((c) => c.classList.contains("active")).map((c) => c.dataset.topic);
+    const body = [
+      `Nome: ${form.nome.value}`,
+      `Email: ${form.email.value}`,
+      form.azienda.value ? `Azienda: ${form.azienda.value}` : null,
+      topics.length ? `Argomenti: ${topics.join(", ")}` : null,
+      "",
+      form.messaggio.value,
+    ].filter((l) => l !== null).join("\n");
+    location.href = `mailto:info@ermeia.agency?subject=${encodeURIComponent("Richiesta consulenza — " + form.nome.value)}&body=${encodeURIComponent(body)}`;
+    form.querySelector(".form-success").hidden = false;
+  });
+});
+
+// Transizione morbida tra le pagine
+const pagePath = (p) => p.replace(/index\.html$/, "");
+document.querySelectorAll('a[href$=".html"], a[href*=".html?"], a[href*=".html#"]').forEach((link) =>
+  link.addEventListener("click", (e) => {
+    const url = new URL(link.href);
+    if (e.metaKey || e.ctrlKey || reduceMotion) return;
+    if (pagePath(url.pathname) === pagePath(location.pathname) && url.search === location.search) {
+      if (url.hash) { e.preventDefault(); document.querySelector(url.hash)?.scrollIntoView({ behavior: "smooth" }); history.replaceState(null, "", url.hash); }
+      return;
+    }
+    e.preventDefault();
+    document.body.classList.add("leaving");
+    setTimeout(() => (location.href = link.href), 350);
+  })
+);
+window.addEventListener("pageshow", () => document.body.classList.remove("leaving"));
 
 // Anno nel footer
 document.getElementById("year").textContent = new Date().getFullYear();

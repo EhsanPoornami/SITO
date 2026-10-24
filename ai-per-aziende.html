@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI per Aziende — Ermeia Agency</title>
+  <meta name="description" content="Agent AI su misura per la tua azienda: automazione dei processi, assistenti per i clienti, gestione di email, documenti e preventivi." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Sfondo animato -->
+  <div class="bg" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+    <canvas id="network"></canvas>
+    <div class="grid"></div>
+  </div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">ERMEIA<span>.</span><small>Agency</small></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html#chi-siamo">Chi Siamo</a>
+        <div class="dropdown">
+          <a href="servizi.html">Servizi <span class="caret-down">▾</span></a>
+          <div class="dropdown-menu">
+            <a href="servizi.html#web"><b>01</b> Siti Web & E-commerce</a>
+            <a href="servizi.html#app"><b>02</b> App & Web App</a>
+            <a href="servizi.html#marketing"><b>03</b> Digital Marketing</a>
+            <a href="servizi.html#social"><b>04</b> Social & Comunicazione</a>
+          </div>
+        </div>
+        <a href="ai-per-aziende.html" class="active">AI per Aziende</a>
+        <a href="index.html#metodo">Metodo</a>
+        <a href="prenota.html" class="btn btn-small">Prenota una call</a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Apri menu"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero container ai-hero">
+      <div>
+        <p class="crumbs reveal"><a href="index.html">Home</a> / AI per Aziende</p>
+        <h1 class="reveal">L'AI che <span class="gradient-text">lavora</span> nella tua azienda</h1>
+        <p class="lead reveal">Progettiamo Agent AI su misura che rispondono ai clienti, gestiscono documenti, aggiornano il CRM e preparano preventivi. Tu ti concentri su ciò che conta davvero.</p>
+        <div class="hero-cta left reveal">
+          <a href="prenota.html?obiettivo=automazione" class="btn">Analizza i tuoi processi <span class="arrow">→</span></a>
+          <a href="#calcolatore" class="btn btn-ghost">Calcola il risparmio</a>
+        </div>
+      </div>
+      <div class="ai-visual hero-orb reveal" aria-hidden="true">
+        <div class="orb"><span>AI</span></div>
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+        <div class="ring r3"></div>
+      </div>
+    </section>
+
+    <!-- Casi d'uso per reparto -->
+    <section class="section container">
+      <p class="eyebrow reveal">Dove interviene</p>
+      <h2 class="reveal">Un agente per <span class="gradient-text">ogni reparto</span></h2>
+      <div class="tabs reveal" role="tablist">
+        <button class="tab active" role="tab" data-tab="vendite">Vendite</button>
+        <button class="tab" role="tab" data-tab="care">Customer care</button>
+        <button class="tab" role="tab" data-tab="admin">Amministrazione</button>
+        <button class="tab" role="tab" data-tab="mkt">Marketing</button>
+      </div>
+      <div class="tab-panels reveal">
+        <div class="tab-panel active" data-panel="vendite" role="tabpanel">
+          <ul class="ticks"><li>Qualifica automatica dei nuovi lead</li><li>Follow-up email personalizzati</li><li>Preventivi generati in pochi minuti</li><li>CRM sempre aggiornato</li></ul>
+          <div class="flow"><span class="node">Nuovo lead dal sito</span><span class="wire"></span><span class="node core">Agent AI</span><span class="wire"></span><span class="node">Preventivo inviato</span></div>
+        </div>
+        <div class="tab-panel" data-panel="care" role="tabpanel">
+          <ul class="ticks"><li>Assistente su sito e WhatsApp 24/7</li><li>Risposte immediate alle domande frequenti</li><li>Smistamento intelligente delle richieste</li><li>Prenotazione automatica degli appuntamenti</li></ul>
+          <div class="flow"><span class="node">Messaggio WhatsApp</span><span class="wire"></span><span class="node core">Agent AI</span><span class="wire"></span><span class="node">Appuntamento fissato</span></div>
+        </div>
+        <div class="tab-panel" data-panel="admin" role="tabpanel">
+          <ul class="ticks"><li>Lettura di fatture e documenti PDF</li><li>Inserimento dati nel gestionale</li><li>Solleciti di pagamento automatici</li><li>Report periodici pronti da inviare</li></ul>
+          <div class="flow"><span class="node">Fattura in arrivo</span><span class="wire"></span><span class="node core">Agent AI</span><span class="wire"></span><span class="node">Registrata nel gestionale</span></div>
+        </div>
+        <div class="tab-panel" data-panel="mkt" role="tabpanel">
+          <ul class="ticks"><li>Bozze di contenuti per i social</li><li>Analisi delle campagne in tempo reale</li><li>Segmentazione dei clienti</li><li>Newsletter personalizzate</li></ul>
+          <div class="flow"><span class="node">Dati campagna</span><span class="wire"></span><span class="node core">Agent AI</span><span class="wire"></span><span class="node">Budget ottimizzato</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calcolatore -->
+    <section class="section container" id="calcolatore">
+      <div class="calc">
+        <div class="calc-inputs">
+          <p class="eyebrow reveal">Calcolatore</p>
+          <h2 class="reveal">Quanto tempo puoi <span class="gradient-text">recuperare</span>?</h2>
+          <label class="range reveal">
+            <span>Persone nel team <output id="o-people">5</output></span>
+            <input type="range" id="r-people" min="1" max="50" value="5" />
+          </label>
+          <label class="range reveal">
+            <span>Ore a settimana su attività ripetitive (a persona) <output id="o-hours">8</output></span>
+            <input type="range" id="r-hours" min="1" max="30" value="8" />
+          </label>
+          <label class="range reveal">
+            <span>Costo orario medio <output id="o-cost">25 €</output></span>
+            <input type="range" id="r-cost" min="10" max="80" step="5" value="25" />
+          </label>
+        </div>
+        <div class="calc-result reveal">
+          <p>Con gli Agent AI potresti recuperare fino a</p>
+          <strong id="calcHours">0</strong>
+          <span>ore all'anno</span>
+          <div class="calc-line"></div>
+          <p>pari a un valore di circa</p>
+          <strong class="small" id="calcEuro">0 €</strong>
+          <small>Stima indicativa: ipotizza che il 60% delle attività ripetitive sia automatizzabile, su 46 settimane lavorative.</small>
+          <a href="prenota.html?obiettivo=automazione" class="btn">Verifica il tuo caso <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Processo -->
+    <section class="section container">
+      <p class="eyebrow reveal">Come lo portiamo in azienda</p>
+      <h2 class="reveal">Dall'analisi all'agente <span class="gradient-text">operativo</span></h2>
+      <div class="steps timeline">
+        <div class="step reveal"><span class="num">01</span><h3>Mappatura</h3><p>Analizziamo i processi e individuiamo le attività che fanno perdere più tempo.</p></div>
+        <div class="step reveal"><span class="num">02</span><h3>Prototipo</h3><p>Costruiamo un primo agente su un caso reale, per vedere subito i risultati.</p></div>
+        <div class="step reveal"><span class="num">03</span><h3>Integrazione</h3><p>Lo colleghiamo a CRM, email, gestionali e strumenti che già usi.</p></div>
+        <div class="step reveal"><span class="num">04</span><h3>Evoluzione</h3><p>Monitoriamo, misuriamo e miglioriamo l'agente nel tempo.</p></div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section container">
+      <p class="eyebrow reveal">Domande frequenti</p>
+      <h2 class="reveal">Tutto quello che vuoi <span class="gradient-text">sapere</span></h2>
+      <div class="faq">
+        <details class="reveal"><summary>Che cos'è un Agent AI?</summary><p>È un assistente basato sull'intelligenza artificiale che non si limita a rispondere: esegue attività concrete, come leggere un'email, compilare un documento o aggiornare un gestionale.</p></details>
+        <details class="reveal"><summary>I miei dati sono al sicuro?</summary><p>Progettiamo ogni integrazione rispettando il GDPR e limitando l'accesso ai soli dati necessari. Ti spieghiamo sempre dove e come vengono trattate le informazioni.</p></details>
+        <details class="reveal"><summary>Devo cambiare i software che uso?</summary><p>No. Gli agenti si integrano con gli strumenti che hai già: email, CRM, gestionali, WhatsApp e molto altro.</p></details>
+        <details class="reveal"><summary>L'AI sostituisce le persone?</summary><p>No: le libera dalle attività ripetitive. Il tuo team resta al centro e dedica il tempo recuperato a clienti, idee e decisioni.</p></details>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="cta reveal">
+        <h2>Scopri cosa può fare l'AI <span class="gradient-text">per te</span></h2>
+        <p>In 30 minuti analizziamo un tuo processo e ti mostriamo come automatizzarlo.</p>
+        <a href="prenota.html?obiettivo=automazione" class="btn">Prenota la call gratuita <span class="arrow">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">ERMEIA<span>.</span><small>Agency</small></a>
+        <p>Siti, app, digital marketing e comunicazione, potenziati da Agent AI.</p>
+        <a href="prenota.html" class="btn btn-small">Prenota una call <span class="arrow">→</span></a>
+      </div>
+      <div>
+        <h4>Naviga</h4>
+        <a href="index.html#chi-siamo">Chi Siamo</a>
+        <a href="servizi.html">Servizi</a>
+        <a href="ai-per-aziende.html">AI per Aziende</a>
+        <a href="index.html#metodo">Metodo</a>
+        <a href="prenota.html">Contatti</a>
+      </div>
+      <div>
+        <h4>Servizi</h4>
+        <a href="servizi.html#web">Siti Web & E-commerce</a>
+        <a href="servizi.html#app">App & Web App</a>
+        <a href="servizi.html#marketing">Digital Marketing</a>
+        <a href="servizi.html#social">Social & Comunicazione</a>
+      </div>
+      <div>
+        <h4>Contatti</h4>
+        <a href="mailto:info@ermeia.agency">info@ermeia.agency</a>
+        <a href="prenota.html">Prenota una consulenza</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="year"></span> Ermeia Agency. Tutti i diritti riservati.</p>
+      <a href="#" class="to-top">Torna su ↑</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
