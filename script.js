@@ -1,16 +1,25 @@
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const finePointer = window.matchMedia("(pointer: fine)").matches;
 const mouse = { x: -9999, y: -9999 };
-window.addEventListener("mousemove", (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+let wakeGlow = () => {};
+window.addEventListener("mousemove", (e) => { mouse.x = e.clientX; mouse.y = e.clientY; wakeGlow(); }, { passive: true });
 
-// Navbar + barra di avanzamento scroll
+// Navbar + barra di avanzamento scroll (un aggiornamento per frame)
 const nav = document.getElementById("nav");
 const progress = document.getElementById("progress");
-window.addEventListener("scroll", () => {
+let scrollMax = 0, scrollTicking = false;
+const measureScroll = () => { scrollMax = document.documentElement.scrollHeight - window.innerHeight; };
+function updateScroll() {
+  scrollTicking = false;
   nav.classList.toggle("scrolled", window.scrollY > 30);
-  const max = document.documentElement.scrollHeight - window.innerHeight;
-  progress.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
-});
+  progress.style.transform = `scaleX(${scrollMax > 0 ? window.scrollY / scrollMax : 0})`;
+}
+window.addEventListener("scroll", () => {
+  if (!scrollTicking) { scrollTicking = true; requestAnimationFrame(updateScroll); }
+}, { passive: true });
+window.addEventListener("resize", measureScroll);
+window.addEventListener("load", () => { measureScroll(); updateScroll(); });
+measureScroll();
 
 // Menu mobile
 const burger = document.getElementById("burger");
@@ -30,12 +39,16 @@ navLinks.querySelectorAll("a").forEach((link) =>
 const canvas = document.getElementById("network");
 const ctx = canvas.getContext("2d");
 let points = [];
+let canvasW = 0;
 function resizeCanvas() {
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  // su mobile il resize scatta anche quando compare/sparisce la barra degli indirizzi: rigenero solo se cambia la larghezza
+  if (points.length && innerWidth === canvasW) return;
+  canvasW = innerWidth;
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
   canvas.width = innerWidth * dpr;
   canvas.height = innerHeight * dpr;
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  const count = Math.min(90, Math.floor((innerWidth * innerHeight) / 16000));
+  const count = Math.min(finePointer ? 70 : 35, Math.floor((innerWidth * innerHeight) / 18000));
   points = Array.from({ length: count }, () => ({
     x: Math.random() * innerWidth,
     y: Math.random() * innerHeight,
@@ -44,55 +57,84 @@ function resizeCanvas() {
     r: Math.random() * 1.4 + 0.6,
   }));
 }
+// le linee sono raggruppate in poche fasce di opacità: un solo stroke() per fascia invece che uno per linea
+const BANDS = 5;
+const linkPaths = Array.from({ length: BANDS }, () => []);
+const mousePaths = Array.from({ length: BANDS }, () => []);
+function strokeBands(paths, rgb, maxAlpha) {
+  paths.forEach((segs, k) => {
+    if (!segs.length) return;
+    ctx.strokeStyle = `rgba(${rgb}, ${(maxAlpha * (k + 1)) / BANDS})`;
+    ctx.beginPath();
+    for (let s = 0; s < segs.length; s += 4) { ctx.moveTo(segs[s], segs[s + 1]); ctx.lineTo(segs[s + 2], segs[s + 3]); }
+    ctx.stroke();
+    segs.length = 0;
+  });
+}
+let networkRunning = false;
 function drawNetwork() {
   ctx.clearRect(0, 0, innerWidth, innerHeight);
+  ctx.fillStyle = "rgba(225, 225, 235, 0.7)";
+  ctx.beginPath();
   for (const p of points) {
     if (!reduceMotion) {
       p.x += p.vx; p.y += p.vy;
       if (p.x < 0 || p.x > innerWidth) p.vx *= -1;
       if (p.y < 0 || p.y > innerHeight) p.vy *= -1;
       // leggera attrazione verso il mouse
-      const dx = mouse.x - p.x, dy = mouse.y - p.y, d = Math.hypot(dx, dy);
-      if (d < 200) { p.x += dx * 0.004; p.y += dy * 0.004; }
+      const dx = mouse.x - p.x, dy = mouse.y - p.y;
+      if (dx * dx + dy * dy < 40000) { p.x += dx * 0.004; p.y += dy * 0.004; }
     }
-    ctx.beginPath();
+    ctx.moveTo(p.x + p.r, p.y);
     ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(225, 225, 235, 0.7)";
-    ctx.fill();
   }
+  ctx.fill();
   for (let i = 0; i < points.length; i++) {
+    const a = points[i];
     for (let j = i + 1; j < points.length; j++) {
-      const a = points[i], b = points[j];
-      const d = Math.hypot(a.x - b.x, a.y - b.y);
-      if (d < 140) {
-        ctx.strokeStyle = `rgba(200, 200, 212, ${0.16 * (1 - d / 140)})`;
-        ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+      const b = points[j];
+      const dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy;
+      if (d2 < 19600) {
+        const k = Math.min(BANDS - 1, Math.floor((1 - Math.sqrt(d2) / 140) * BANDS));
+        linkPaths[k].push(a.x, a.y, b.x, b.y);
       }
     }
-    const a = points[i];
-    const dm = Math.hypot(a.x - mouse.x, a.y - mouse.y);
-    if (dm < 180) {
-      ctx.strokeStyle = `rgba(255, 255, 255, ${0.35 * (1 - dm / 180)})`;
-      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+    const mx = a.x - mouse.x, my = a.y - mouse.y, dm2 = mx * mx + my * my;
+    if (dm2 < 32400) {
+      const k = Math.min(BANDS - 1, Math.floor((1 - Math.sqrt(dm2) / 180) * BANDS));
+      mousePaths[k].push(a.x, a.y, mouse.x, mouse.y);
     }
   }
-  if (!reduceMotion) requestAnimationFrame(drawNetwork);
+  ctx.lineWidth = 1;
+  strokeBands(linkPaths, "200, 200, 212", 0.16);
+  strokeBands(mousePaths, "255, 255, 255", 0.35);
+  if (!reduceMotion && !document.hidden) requestAnimationFrame(drawNetwork);
+  else networkRunning = false;
+}
+function startNetwork() {
+  if (networkRunning) return;
+  networkRunning = true;
+  requestAnimationFrame(drawNetwork);
 }
 resizeCanvas();
-drawNetwork();
+if (reduceMotion) drawNetwork(); else startNetwork();
+// la rete si ferma quando la scheda non è visibile e riparte al ritorno
+document.addEventListener("visibilitychange", () => { if (!document.hidden && !reduceMotion) startNetwork(); });
 window.addEventListener("resize", () => { resizeCanvas(); if (reduceMotion) drawNetwork(); });
 
 // Alone luminoso che segue il cursore
 const glow = document.getElementById("cursorGlow");
 if (finePointer && !reduceMotion) {
-  let gx = innerWidth / 2, gy = innerHeight / 2;
-  (function followGlow() {
+  let gx = innerWidth / 2, gy = innerHeight / 2, glowRunning = false;
+  // il ciclo gira solo mentre l'alone sta raggiungendo il cursore, poi si ferma
+  function followGlow() {
     gx += (mouse.x - gx) * 0.12;
     gy += (mouse.y - gy) * 0.12;
-    glow.style.transform = `translate(${gx}px, ${gy}px)`;
-    requestAnimationFrame(followGlow);
-  })();
+    glow.style.transform = `translate3d(${gx}px, ${gy}px, 0)`;
+    if (Math.abs(mouse.x - gx) + Math.abs(mouse.y - gy) > 0.5) requestAnimationFrame(followGlow);
+    else glowRunning = false;
+  }
+  wakeGlow = () => { if (!glowRunning) { glowRunning = true; requestAnimationFrame(followGlow); } };
 } else {
   glow.remove();
 }
@@ -152,17 +194,27 @@ if (!typed) {
 
 // Card con inclinazione 3D e luce che segue il mouse
 document.querySelectorAll(".card").forEach((card) => {
-  card.addEventListener("mousemove", (e) => {
-    const r = card.getBoundingClientRect();
-    const x = e.clientX - r.left, y = e.clientY - r.top;
+  let frame = 0, last = null;
+  // al massimo un aggiornamento per frame, anche se il mouse invia più eventi
+  const apply = () => {
+    frame = 0;
+    const rect = card.getBoundingClientRect();
+    const x = last.clientX - rect.left, y = last.clientY - rect.top;
     card.style.setProperty("--x", `${x}px`);
     card.style.setProperty("--y", `${y}px`);
     if (reduceMotion) return;
-    const rx = (y / r.height - 0.5) * -12;
-    const ry = (x / r.width - 0.5) * 12;
+    const rx = (y / rect.height - 0.5) * -12;
+    const ry = (x / rect.width - 0.5) * 12;
     card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+  };
+  card.addEventListener("mousemove", (e) => {
+    last = e;
+    if (!frame) frame = requestAnimationFrame(apply);
+  }, { passive: true });
+  card.addEventListener("mouseleave", () => {
+    cancelAnimationFrame(frame); frame = 0;
+    card.style.transform = "";
   });
-  card.addEventListener("mouseleave", () => { card.style.transform = ""; });
 });
 
 // Bottoni magnetici
